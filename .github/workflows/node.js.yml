@@ -13,7 +13,8 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [18.16.0]
+        node-version: [18.x]
+        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
     - uses: actions/checkout@v3
@@ -21,7 +22,8 @@ jobs:
       uses: actions/setup-node@v2
       with:
         node-version: ${{ matrix.node-version }}
-    - run: npm install -g npm@9.5.1
+    - run: npm install -g npm@latest
+    - run: npm cache clean --force  # Add this step to clear npm cache
     - run: npm ci
       continue-on-error: true 
      
